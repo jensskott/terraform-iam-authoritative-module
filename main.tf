@@ -1,13 +1,17 @@
 # Should use the local variables to merge the different role members into one and output them together in a list
 locals {
   roles = [
+    for v in var.roles : {
+      role    = v.role
+      members = v.members
+    }
   ]
 }
 
 # Output of roles, should b e a list of roles
 # [{role: roles/run.invoker, members: [test@example.com]}]
 output "iam_roles" {
-  value = var.roles
+  value = local.roles
 }
 
 # A list of objects with the role and members, needs to be a list since the input can contain multiple entries of the

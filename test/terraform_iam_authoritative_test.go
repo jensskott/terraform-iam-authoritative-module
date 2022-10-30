@@ -31,8 +31,5 @@ func TestTerraformHelloWorldExample(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	output := terraform.Output(t, terraformOptions, "iam_roles")
-	//var outputRoles []M
-	//json.Unmarshal([]byte(output), &outputRoles)
-
 	assert.Equal(t, []M{{"role": "roles/run.invoker", "members": []string{"group:test-group@example.com", "user:test-user@example.com", "group:test-group2@example.com", "user:test-user2@example.com"}}}, output)
 }
